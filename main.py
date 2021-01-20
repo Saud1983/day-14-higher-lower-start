@@ -3,14 +3,14 @@ from art import logo,vs
 from game_data import data
 from replit import clear
 
-# to activate the while loop
+# To activate the while loop
 game=True
 
-#player score
+#Player score
 score=0
 
-# function to randomly select an element from data list and delete that selected element
 def new_selection():
+  """A function that randomly select an element from data list and delete that selected element"""
   dictionary_len=len(data)
   selection=randint(0,dictionary_len-1)
   # print(dictionary_len)
@@ -50,7 +50,7 @@ while game:
   # Ask the player to choose one of those names showing in the previous strings 
   answer=input("Who has more followers? Type 'A' or 'B': ").lower()
 
-  # Check the player answer, if the answer is correct, player will gain 1 score and the first element in the compair_list will be removed and use the correct variable as a filter to print the continuation of the game, othewise the game will be terminated and the filter will select the termination message to be printed
+  # Check the player answer, if the answer is correct, player will gain 1 score and the first element in the compair_list will be removed and use the is_correct variable as a filter to print the continuation of the game, othewise the game will be terminated and the filter will select the termination message to be printed
   if answer=="a":
     if compair_list[0]["follower_count"]>compair_list[1]["follower_count"]:
       score += 1
@@ -59,16 +59,16 @@ while game:
       correct=1
     else:
       game=False
-      correct=0
+      is_correct=False
   else:
     if compair_list[1]["follower_count"]>compair_list[0]["follower_count"]:
       score += 1
       first_element=compair_list[0]
       compair_list.remove(first_element)
-      correct=1
+      is_correct=True
     else:
       game=False
-      correct=0   
+      is_correct=False   
   
   # calling the function to select and return an element from the list called data
   new_selection()
@@ -84,7 +84,7 @@ while game:
   print(logo)
 
   # Print a message based on the value of the filter
-  if correct==1:
+  if is_correct:
     print(f"You're right! Current score: {score}.")
   else:
     print(f"Sorry, that's wrong. Final score: {score}")
